@@ -1,13 +1,16 @@
 'use strict';
 
 import request from 'request';
+import battlecomics from './battlecomics';
+// import formatter from './formatter';
 
-const token = process.env.FB_PAGE_ACCESS_TOKEN;
+const access_token = process.env.FB_PAGE_ACCESS_TOKEN;
+const verify_token = process.env.FB_VERIFY_TOKEN;
 
 let sendMessage = (messageData, sender) => {
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: token},
+        qs: {access_token: access_token},
         method: 'POST',
         json: {
             recipient: {id: sender},
@@ -69,7 +72,23 @@ let respondMessage = (message, sender) => {
 		sendGenericMessage(sender);
 		return;
 	}
+
+	match = message.match(/인기 웹툰/);
+	if (match) {
+		battlecomics.getPopularWebtoons().then(() => {
+			sendTextMessage("현재 실시간 인기 웹툰입니다.");
+			// sendMessage(formatter.formatWebtoons(webtoons), sender);
+		});
+		return;
+	}
 	sendTextMessage("Text received, echo: " + text.substring(0, 200), sender)
+}
+
+let handleGet = (req, res) => {
+	if (req.query['hub.verify_token'] === verify_token) {
+        res.send(req.query['hub.challenge']);
+    }
+    res.send('Error, wrong validation token');
 }
 
 let handlePost = (req, res) => {
@@ -87,4 +106,5 @@ let handlePost = (req, res) => {
     res.sendStatus(200)
 }
 
+exports.handleGet = handleGet;
 exports.handlePost = handlePost;

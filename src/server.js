@@ -21,6 +21,7 @@ app.use(bodyParser.json());
 app.get('/', home.handleGet);
 
 // webhook
+app.get('/webhook', webhook.handleGet);
 app.post('/webhook', webhook.handlePost);
 
 // Sign up the server
