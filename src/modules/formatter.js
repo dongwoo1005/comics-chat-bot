@@ -21,23 +21,23 @@ let formatSuggestion = (message) => {
 		quick_replies: [{
 			content_type: "text",
 			title: "인기 웹툰",
-			payload: "popular_webtoon_suggesion"
+			payload: "popular_webtoon"
 		}, {
 			content_type: "text",
 			title: "신규 웹툰",
-			payload: "new_webtoon_suggesion"
+			payload: "new_webtoon"
 		}, {
 			content_type: "text",
 			title: "인기 페이퍼",
-			payload: "popular_paper_suggesion"
+			payload: "popular_paper"
 		}, {
 			content_type: "text",
 			title: "인기 일러스트",
-			payload: "popular_illust_suggesion"
+			payload: "popular_illust"
 		}, {
 			content_type: "text",
 			title: "인기 게시글",
-			payload: "popular_board_suggesion"
+			payload: "popular_board"
 		}]
 	};
 };
