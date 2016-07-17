@@ -2,15 +2,17 @@
 
 let formatWebtoons = webtoons => {
 	let elements = [];
-	let webtoonPageUrl = "http://www.battlecomics.co.kr/webtoons/"
+	let webtoonsUrl = "http://www.battlecomics.co.kr/webtoons/"
 	webtoons.forEach(webtoon => {
+		let webtoonUrl = webtoonsUrl + webtoon.id;
 		elements.push({
 			title: webtoon.name,
 			subtitle: webtoon.writer,
-			"image_url": webtoon.image,
-			"buttons": [{
+			item_url: webtoonUrl
+			image_url: webtoon.image,
+			buttons: [{
 				"type": "web_url",
-				"url": webtoonPageUrl + webtoon.id,
+				"url": webtoonUrl,
 				"title": "바로 보기"
 			}]
 		});
