@@ -28,16 +28,16 @@ let formatSuggestion = (message) => {
 			payload: "new_webtoon"
 		}, {
 			content_type: "text",
+			title: "인기 게시글",
+			payload: "popular_board"
+		}, {
+			content_type: "text",
 			title: "인기 페이퍼",
 			payload: "popular_paper"
 		}, {
 			content_type: "text",
 			title: "인기 일러스트",
 			payload: "popular_illust"
-		}, {
-			content_type: "text",
-			title: "인기 게시글",
-			payload: "popular_board"
 		}]
 	};
 };
