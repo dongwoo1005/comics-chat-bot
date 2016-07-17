@@ -15,6 +15,33 @@ let formatInGenericTemplate = elements => {
 	};
 }
 
+let formatHelp = (message) => {
+	return {
+		text: message,
+		quick_replies: [{
+			content_type: "text",
+			title: "인기 웹툰",
+			payload: "popular_webtoons"
+		}, {
+			content_type: "text",
+			title: "신규 웹툰",
+			payload: "new_webtoons"
+		}, {
+			content_type: "text",
+			title: "인기 페이퍼",
+			payload: "popular_paper"
+		}, {
+			content_type: "text",
+			title: "인기 일러스트",
+			payload: "popular_illust"
+		}, {
+			content_type: "text",
+			title: "인기 게시글",
+			payload: "popular_webtoon"
+		}]
+	};
+};
+
 let formatWebtoons = webtoons => {
 	let elements = [];
 	let webtoonsUrl = baseWebUrl + "/webtoons/"
@@ -117,7 +144,7 @@ let formatIntro = () => {
 	let buttons = [{
 		type: "web_url",
 		url: baseWebUrl,
-		title: "배틀코믹스 바로가기"
+		title: "배틀코믹스 놀러가"
 	}, {
 		type: "postback",
 		payload: "start_chatting",
@@ -139,3 +166,4 @@ exports.formatPapers = formatPapers;
 exports.formatIllusts = formatIllusts;
 exports.formatBoardItems = formatBoardItems;
 exports.formatIntro = formatIntro;
+exports.formatHelp = formatHelp;
