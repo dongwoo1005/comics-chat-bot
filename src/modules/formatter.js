@@ -45,7 +45,7 @@ let formatPapers = papers => {
 	let elements = [];
 
 	papers.forEach(paper => {
-		let itemUrl = 'http://www.battlecomics.co.kr/users/' + paper.fk_user_id + '/page/items/' + paper.id
+		let itemUrl = 'http://www.battlecomics.co.kr/users/' + paper.fk_user_id + '/page/items/' + paper.id;
 		let jsonData = {
 			title: paper.name,
 			subtitle: paper.user_name,
@@ -55,7 +55,7 @@ let formatPapers = papers => {
 				url: itemUrl,
 				title: "바로 보기"
 			}]
-		}
+		};
 		elements.push(jsonData);
 	});
 	return formatInGenericTemplate(elements);
