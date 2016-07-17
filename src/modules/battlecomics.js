@@ -24,7 +24,7 @@ let getPopularWebtoons = () => {
 let getPopularPapers = () => {
 	return new Promise((resolve, reject) => {
 		let url = apiEndpoint + '/items/hot';
-		let queryString = {limit: 10};
+		let queryString = {limit: 3};
 		request({
 			url: url,
 			qs: queryString,

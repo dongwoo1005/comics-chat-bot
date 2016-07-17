@@ -18,9 +18,9 @@ let formatWebtoons = webtoons => {
 	webtoons.forEach((webtoon, index, array) => {
 		let webtoonUrl = webtoonsUrl + webtoon.id;
 		let buttons = [{
-			"type": "web_url",
-			"url": webtoonUrl,
-			"title": "바로 보기"
+			type: "web_url",
+			url: webtoonUrl,
+			title: "바로 보기"
 		}];
 		// if (index === array.length - 1){
 		// 	buttons.push({
@@ -32,9 +32,9 @@ let formatWebtoons = webtoons => {
 		let jsonData = {
 			title: webtoon.name,
 			subtitle: webtoon.writer,
-			"item_url": webtoonUrl,
-			"image_url": webtoon.image,
-			"buttons": buttons
+			item_url: webtoonUrl,
+			image_url: webtoon.image,
+			buttons: buttons
 		};
 		elements.push(jsonData);
 	});

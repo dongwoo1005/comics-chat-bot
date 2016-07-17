@@ -110,6 +110,7 @@ let respondMessage = (message, sender) => {
 			sendTextMessage('배틀코믹스 인기 페이퍼입니다.', sender);
 			sendMessage(formatter.formatPapers(papers), sender);
 		});
+		return;
 	}
 
 	sendTextMessage('Text received, echo: ' + message.substring(0, 200), sender)
