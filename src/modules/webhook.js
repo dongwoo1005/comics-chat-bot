@@ -2,7 +2,7 @@
 
 import request from 'request';
 import battlecomics from './battlecomics';
-// import formatter from './formatter';
+import formatter from './formatter';
 
 const access_token = process.env.FB_PAGE_ACCESS_TOKEN;
 const verify_token = process.env.FB_VERIFY_TOKEN;
@@ -75,15 +75,16 @@ let respondMessage = (message, sender) => {
 
 	match = message.match(/인기 웹툰/);
 	if (match) {
-		battlecomics.getPopularWebtoons().then((webtoons) => {
+		battlecomics.getPopularWebtoons().then(webtoons => {
 			sendTextMessage('현재 실시간 인기 웹툰입니다.', sender);
-			webtoons.forEach((webtoon) => {
-				sendTextMessage('제목: ' + webtoon.name, sender);
-			});
-			// sendMessage(formatter.formatWebtoons(webtoons), sender);
+			// webtoons.forEach((webtoon) => {
+			// 	sendTextMessage('제목: ' + webtoon.name, sender);
+			// });
+			sendMessage(formatter.formatWebtoons(webtoons), sender);
 		});
 		return;
 	}
+	
 	sendTextMessage('Text received, echo: ' + message.substring(0, 200), sender)
 }
 
