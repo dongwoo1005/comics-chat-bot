@@ -7,7 +7,7 @@ import home from './modules/home';
 
 import webhook from './modules/webhook';
 
-let app = express();
+const app = express();
 
 app.set('port', (process.env.PORT || 5000));
 

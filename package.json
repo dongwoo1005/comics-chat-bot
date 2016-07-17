@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon --exec babel-node src/server.js",
-    "prestart": "babel src --out-dir dist",
+    "prestart": "rm -rf dist && babel src --out-dir dist",
     "start": "node dist/server.js"
   },
   "author": "Dongwoo Son",

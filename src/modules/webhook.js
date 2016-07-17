@@ -2,29 +2,33 @@
 
 import request from 'request';
 
-let token = process.env.FB_PAGE_ACCESS_TOKEN;
+const token = process.env.FB_PAGE_ACCESS_TOKEN;
 
-let sendTextMessage = (sender, text) => {
-    var messageData = { text: text };
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
+let sendMessage = (messageData, sender) => {
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: token},
         method: 'POST',
         json: {
             recipient: {id: sender},
             message: messageData
         }
-    }, (error, response, body) => {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    });
+	}, (error, response) => {
+		if (error) {
+			console.log('Error sending message: ', error);
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error);
+		}
+	});
+}
+
+let sendTextMessage = (text, sender) => {
+    let messageData = { text: text };
+    sendMessage(messageData, sender);
 };
 
 let sendGenericMessage = (sender) => {
-    var messageData = {
+    let messageData = {
         "attachment": {
             "type": "template",
             "payload": {
@@ -55,40 +59,29 @@ let sendGenericMessage = (sender) => {
             }
         }
     };
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: token},
-        method: 'POST',
-        json: {
-            recipient: {id: sender},
-            message: messageData
-        }
-    }, (error, response, body) => {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    });
+    sendMessage(messageData, sender);
 };
 
+let respondMessage = (message, sender) => {
+	let match;
+	match = message.match(/Generic/i);
+	if (match) {
+		sendGenericMessage(sender);
+		return;
+	}
+	sendTextMessage("Text received, echo: " + text.substring(0, 200), sender)
+}
+
 let handlePost = (req, res) => {
-	var messaging_events = req.body.entry[0].messaging;
-    for (var i = 0; i < messaging_events.length; i++) {
-        var event = req.body.entry[0].messaging[i];
-        var sender = event.sender.id;
-        var text;
+	let messaging_events = req.body.entry[0].messaging;
+    for (let i = 0; i < messaging_events.length; i++) {
+        let event = req.body.entry[0].messaging[i];
+        let sender = event.sender.id;
         if (event.message && event.message.text) {
-            text = event.message.text;
-            if (text === 'Generic') {
-                sendGenericMessage(sender);
-                continue
-            }
-            sendTextMessage(sender, "Text received, echo: " + text.substring(0, 200))
-        }
-        if (event.postback) {
-            text = JSON.stringify(event.postback);
-            sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+            respondMessage(event.message.text, sender);
+        } else if (event.postback) {
+            let text = JSON.stringify(event.postback);
+            sendTextMessage("Postback received: "+text.substring(0, 200), sender)
         }
     }
     res.sendStatus(200)
