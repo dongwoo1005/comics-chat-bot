@@ -65,6 +65,41 @@ let sendGenericMessage = (sender) => {
     sendMessage(messageData, sender);
 };
 
+let getPopularWebtoons = () => {
+	battlecomics.getPopularWebtoons().then(webtoons => {
+		sendTextMessage('현재 실시간 인기 웹툰입니다.', sender);
+		sendMessage(formatter.formatWebtoons(webtoons), sender);
+	});
+};
+
+let getPopularPapers = () => {
+	battlecomics.getPopularPapers().then(papers => {
+		sendTextMessage('배틀코믹스 인기 페이퍼입니다.', sender);
+		sendMessage(formatter.formatPapers(papers), sender);
+	});
+};
+
+let getPopularIllusts = () => {
+	battlecomics.getPopularIllusts().then(illusts => {
+		sendTextMessage('배틀코믹스 인기 일러스트입니다.', sender);
+		sendMessage(formatter.formatIllusts(illusts), sender);
+	});
+};
+
+let getPopularBoardItems = () => {
+	battlecomics.getPopularBoardItems().then(boardItems => {
+		sendTextMessage('배틀코믹스 인기 게시글입니다.', sender);
+		sendMessage(formatter.formatBoardItems(boardItems), sender);
+	});
+}
+
+let getNewWebtoons = () => {
+	battlecomics.getNewWebtoons().then(webtoons => {
+		sendTextMessage('배틀코믹스 신규 웹툰입니다.', sender);
+		sendMessage(formatter.formatWebtoons(webtoons), sender);
+	});
+}
+
 let respondMessage = (message, sender) => {
 	let text = message.replace(/ /g, '');
 
@@ -77,46 +112,31 @@ let respondMessage = (message, sender) => {
 
 	match = text.match(/인기웹툰/);
 	if (match) {
-		battlecomics.getPopularWebtoons().then(webtoons => {
-			sendTextMessage('현재 실시간 인기 웹툰입니다.', sender);
-			sendMessage(formatter.formatWebtoons(webtoons), sender);
-		});
+		getPopularWebtoons();
 		return;
 	}
 
 	match = text.match(/인기페이퍼/);
 	if (match) {
-		battlecomics.getPopularPapers().then(papers => {
-			sendTextMessage('배틀코믹스 인기 페이퍼입니다.', sender);
-			sendMessage(formatter.formatPapers(papers), sender);
-		});
+		getPopularPapers();
 		return;
 	}
 
 	match = text.match(/인기일러/);
 	if (match) {
-		battlecomics.getPopularIllusts().then(illusts => {
-			sendTextMessage('배틀코믹스 인기 일러스트입니다.', sender);
-			sendMessage(formatter.formatIllusts(illusts), sender);
-		});
+		getPopularIllusts();
 		return;
 	}
 
 	match = text.match(/인기게시글/);
 	if (match) {
-		battlecomics.getPopularBoardItems().then(boardItems => {
-			sendTextMessage('배틀코믹스 인기 게시글입니다.', sender);
-			sendMessage(formatter.formatBoardItems(boardItems), sender);
-		});
+		getPopularBoardItems();
 		return;
 	}
 
 	match = text.match(/신규웹툰/);
 	if (match) {
-		battlecomics.getNewWebtoons().then(webtoons => {
-			sendTextMessage('배틀코믹스 신규 웹툰입니다.', sender);
-			sendMessage(formatter.formatWebtoons(webtoons), sender);
-		});
+		getNewWebtoons();
 		return;
 	}
 
@@ -142,11 +162,21 @@ let handlePost = (req, res) => {
         } else if (event.postback) {
             // let text = JSON.stringify(event.postback);
             // sendTextMessage("Postback received: "+text.substring(0, 200), sender)
-
-            if (event.postback.payload === "get_started") {
+            let payload = event.postback.payload
+            if (payload === "get_started") {
             	sendMessage(formatter.formatIntro(), sender);
-            } else if (event.postback.payload === "start_chatting") {
-            	sendMessage(formatter.formatSuggestion("안녕하세요 반갑습니다. 무엇을 보여드릴까요?"), sender);
+            } else if (payload === "start_chatting") {
+            	sendMessage(formatter.formatSuggestion("안녕하세요 반갑습니다. 무엇을 보여드릴까요? "), sender);
+            } else if (payload === "popular_webtoon") {
+            	getPopularWebtoons();
+            } else if (payload === "new_webtoon") {
+            	getNewWebtoons();
+            } else if (payload === "popular_paper") {
+            	getPopularPapers();
+            } else if (payload === "popular_illust") {
+            	getPopularIllusts();
+            } else if (payload === "popular_board") {
+            	getPopularBoardItems();
             }
         }
     }
