@@ -13,9 +13,9 @@ let greetFirstTimeUserInteraction = () => {
         qs: {access_token: access_token},
         method: 'POST',
         json: {
-            setting_type: "greeting",
-            greeting: {
-            	text: "Welcome to Battle Comics"
+            "setting_type": "greeting",
+            "greeting": {
+            	"text": "Welcome to Battle Comics"
             }
         }
 	}, (error, response) => {
