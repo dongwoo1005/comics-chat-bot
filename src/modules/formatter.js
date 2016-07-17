@@ -15,7 +15,7 @@ let formatInGenericTemplate = elements => {
 	};
 }
 
-let formatHelp = (message) => {
+let formatSuggestion = (message) => {
 	return {
 		text: message,
 		quick_replies: [{
@@ -166,4 +166,4 @@ exports.formatPapers = formatPapers;
 exports.formatIllusts = formatIllusts;
 exports.formatBoardItems = formatBoardItems;
 exports.formatIntro = formatIntro;
-exports.formatHelp = formatHelp;
+exports.formatSuggestion = formatSuggestion;
