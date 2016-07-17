@@ -7,6 +7,26 @@ import formatter from './formatter';
 const access_token = process.env.FB_PAGE_ACCESS_TOKEN;
 const verify_token = process.env.FB_VERIFY_TOKEN;
 
+let greetFirstTimeUserInteraction = () => {
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
+        qs: {access_token: access_token},
+        method: 'POST',
+        json: {
+            setting_type: "greeting",
+            greeting: {
+            	text: "Welcome to Battle Comics"
+            }
+        }
+	}, (error, response) => {
+		if (error) {
+			console.log('Error sending message: ', error);
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error);
+		}
+	});
+}
+
 let sendMessage = (messageData, sender) => {
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -77,9 +97,6 @@ let respondMessage = (message, sender) => {
 	if (match) {
 		battlecomics.getPopularWebtoons().then(webtoons => {
 			sendTextMessage('현재 실시간 인기 웹툰입니다.', sender);
-			// webtoons.forEach((webtoon) => {
-			// 	sendTextMessage('제목: ' + webtoon.name, sender);
-			// });
 			sendMessage(formatter.formatWebtoons(webtoons), sender);
 		});
 		return;
@@ -96,6 +113,8 @@ let handleGet = (req, res) => {
 }
 
 let handlePost = (req, res) => {
+	greetFirstTimeUserInteraction();
+
 	let messaging_events = req.body.entry[0].messaging;
     for (let i = 0; i < messaging_events.length; i++) {
         let event = req.body.entry[0].messaging[i];
