@@ -12,7 +12,7 @@ let getPopularWebtoons = () => {
 				console.log('Error: ', response.body.error);
 			}
 			if (!error && response.statusCode == 200) {
-				console.log('body code: ' + JSON.parse(body).body);
+				console.log('body code: ' + JSON.parse(body).code);
 			}
 		}
 	);
