@@ -14,8 +14,7 @@ let sendMessage = (messageData, sender) => {
         method: 'POST',
         json: {
             recipient: {id: sender},
-            message: messageData,
-            sender_action: "typing_on"
+            message: messageData
         }
 	}, (error, response) => {
 		if (error) {
