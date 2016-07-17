@@ -2,11 +2,11 @@
   "name": "battlecomics-fbmessengerbot-test",
   "version": "1.0.0",
   "description": "Testing Facebook Messenger Bot for BattleComics",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/index.js",
+    "dev": "nodemon --exec babel-node src/server.js",
     "prestart": "babel src --out-dir dist",
-    "start": "node dist/index"
+    "start": "node dist/server.js"
   },
   "author": "Dongwoo Son",
   "license": "ISC",
