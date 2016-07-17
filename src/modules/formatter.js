@@ -11,7 +11,7 @@ let formatWebtoons = webtoons => {
 			"buttons": [{
 				"type": "web_url",
 				"url": webtoonPageUrl + webtoon.id,
-				"title": "보러가기"
+				"title": "바로 보기"
 			}]
 		});
 	});

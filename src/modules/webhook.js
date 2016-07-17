@@ -14,7 +14,8 @@ let sendMessage = (messageData, sender) => {
         method: 'POST',
         json: {
             recipient: {id: sender},
-            message: messageData
+            message: messageData,
+            sender_action: "typing_on"
         }
 	}, (error, response) => {
 		if (error) {
@@ -84,7 +85,7 @@ let respondMessage = (message, sender) => {
 		});
 		return;
 	}
-	
+
 	sendTextMessage('Text received, echo: ' + message.substring(0, 200), sender)
 }
 
