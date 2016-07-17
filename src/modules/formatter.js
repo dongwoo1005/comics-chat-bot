@@ -1,5 +1,17 @@
 'use strict';
 
+let formatInGenericTemplate = elements => {
+	return {
+		"attachment": {
+			"type": "template",
+			"payload": {
+				"template_type": "generic",
+				"elements": elements
+			}
+		}
+	};
+}
+
 let formatWebtoons = webtoons => {
 	let elements = [];
 	let webtoonsUrl = "http://www.battlecomics.co.kr/webtoons/"
@@ -17,24 +29,37 @@ let formatWebtoons = webtoons => {
 		// 		"title": "더 보기"
 		// 	});
 		// }
-		let jsondata = {
+		let jsonData = {
 			title: webtoon.name,
 			subtitle: webtoon.writer,
 			"item_url": webtoonUrl,
 			"image_url": webtoon.image,
 			"buttons": buttons
 		};
-		elements.push(jsondata);
+		elements.push(jsonData);
 	});
-	return {
-		"attachment": {
-			"type": "template",
-			"payload": {
-				"template_type": "generic",
-				"elements": elements
-			}
+	return formatInGenericTemplate(elements);
+};
+
+let formatPapers = papers => {
+	let elements = [];
+
+	papers.forEach(paper => {
+		let itemUrl = 'http://www.battlecomics.co.kr/users/' + paper.fk_user_id + '/page/items/' + paper.id
+		let jsonData = {
+			title: paper.name,
+			subtitle: paper.user_name,
+			item_url: itemUrl,
+			buttons: [{
+				type: "web_url",
+				url: itemUrl,
+				title: "바로 보기"
+			}]
 		}
-	};
+		elements.push(jsonData);
+	});
+	return formatInGenericTemplate(elements);
 };
 
 exports.formatWebtoons = formatWebtoons;
+exports.formatPapers = formatPapers;

@@ -86,20 +86,30 @@ let sendGenericMessage = (sender) => {
 };
 
 let respondMessage = (message, sender) => {
+	let text = message.replace(/ /g, '');
+
 	let match;
-	match = message.match(/Generic/i);
+	match = text.match(/Generic/i);
 	if (match) {
 		sendGenericMessage(sender);
 		return;
 	}
 
-	match = message.match(/인기 웹툰/);
+	match = text.match(/인기웹툰/);
 	if (match) {
 		battlecomics.getPopularWebtoons().then(webtoons => {
 			sendTextMessage('현재 실시간 인기 웹툰입니다.', sender);
 			sendMessage(formatter.formatWebtoons(webtoons), sender);
 		});
 		return;
+	}
+
+	match = text.match(/인기페이퍼/);
+	if (match) {
+		battlecomics.getPopularPapers().then(papers => {
+			sendTextMessage('배틀코믹스 인기 페이퍼입니다.', sender);
+			sendMessage(formatter.formatPapers(papers), sender);
+		});
 	}
 
 	sendTextMessage('Text received, echo: ' + message.substring(0, 200), sender)
