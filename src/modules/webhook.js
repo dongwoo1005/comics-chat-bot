@@ -7,53 +7,6 @@ import formatter from './formatter';
 const access_token = process.env.FB_PAGE_ACCESS_TOKEN;
 const verify_token = process.env.FB_VERIFY_TOKEN;
 
-let greetFirstTimeUserInteraction = () => {
-	request({
-		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
-        qs: {access_token: access_token},
-        method: 'POST',
-        json: {
-            "setting_type": "greeting",
-            "greeting": {
-            	"text": "Welcome to Battle Comics"
-            }
-        }
-	}, (error, response) => {
-		if (error) {
-			console.log('Error sending message: ', error);
-		} else if (response.body.error) {
-			console.log('Error: ', response.body.error);
-		} else {
-			console.log('Greeting');
-		}
-	});
-}
-
-let setPersistentMenu = () => {
-	request({
-		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
-        qs: {access_token: access_token},
-        method: 'POST',
-        json: {
-            "setting_type": "call_to_actions",
-            "thread_state": "existing_thread",
-            "call_to_actions": [{
-            	type: "web_url",
-            	title: "배틀코믹스 바로가기",
-            	url: "http://www.battlecomics.co.kr"
-            }]
-        }
-	}, (error, response) => {
-		if (error) {
-			console.log('Error sending message: ', error);
-		} else if (response.body.error) {
-			console.log('Error: ', response.body.error);
-		} else {
-			console.log('Setting up Menu');
-		}
-	});
-}
-
 let sendMessage = (messageData, sender) => {
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -189,6 +142,12 @@ let handlePost = (req, res) => {
         } else if (event.postback) {
             let text = JSON.stringify(event.postback);
             sendTextMessage("Postback received: "+text.substring(0, 200), sender)
+
+            if (event.postback.payload === "get_starated") {
+            	sendMessage(formatter.formatIntro(), sender);
+            } else if (event.postback.payload === "start_chatting") {
+            	sendTextMessage("안녕하세요. 반갑습니다.");
+            }
         }
     }
     res.sendStatus(200)
