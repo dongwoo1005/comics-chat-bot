@@ -143,7 +143,7 @@ let handlePost = (req, res) => {
             let text = JSON.stringify(event.postback);
             sendTextMessage("Postback received: "+text.substring(0, 200), sender)
 
-            if (event.postback.payload === "get_starated") {
+            if (event.postback.payload === "get_started") {
             	sendMessage(formatter.formatIntro(), sender);
             } else if (event.postback.payload === "start_chatting") {
             	sendTextMessage("안녕하세요. 반갑습니다.");
