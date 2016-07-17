@@ -112,7 +112,7 @@ let respondMessage = (message, sender) => {
 
 	match = text.match(/리오|도와|도움/);
 	if (match) {
-		sendMessage(formatter.formatSuggestion("무엇을 도와드릴까요? "), sender);
+		sendMessage(formatter.formatSuggestion("무엇을 도와드릴까요?"), sender);
 	}
 
 	match = text.match(/인기웹툰/);
@@ -121,27 +121,27 @@ let respondMessage = (message, sender) => {
 		return;
 	}
 
-	match = text.match(/인기페이퍼/);
+	match = text.match(/신규웹툰|신작/);
+	if (match) {
+		getNewWebtoons(sender);
+		return;
+	}
+
+	match = text.match(/인기페이퍼|페이퍼/);
 	if (match) {
 		getPopularPapers(sender);
 		return;
 	}
 
-	match = text.match(/인기일러/);
+	match = text.match(/인기일러|일러/);
 	if (match) {
 		getPopularIllusts(sender);
 		return;
 	}
 
-	match = text.match(/인기게시글/);
+	match = text.match(/인기게시글|게시글|게시판/);
 	if (match) {
 		getPopularBoardItems(sender);
-		return;
-	}
-
-	match = text.match(/신규웹툰/);
-	if (match) {
-		getNewWebtoons(sender);
 		return;
 	}
 
