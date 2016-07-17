@@ -1,6 +1,7 @@
 'use strict';
 
 const baseWebUrl = "http://www.battlecomics.co.kr";
+const baseFbShareUrl = 'https://www.facebook.com/sharer/sharer.php?u='
 
 let formatInGenericTemplate = elements => {
 	return {
@@ -17,12 +18,18 @@ let formatInGenericTemplate = elements => {
 let formatWebtoons = webtoons => {
 	let elements = [];
 	let webtoonsUrl = baseWebUrl + "/webtoons/"
+
 	webtoons.forEach((webtoon, index, array) => {
 		let webtoonUrl = webtoonsUrl + webtoon.id;
+		let shareOnFacebookUrl = baseFbShareUrl + webtoonUrl;
 		let buttons = [{
 			type: "web_url",
 			url: webtoonUrl,
 			title: "바로 보기"
+		}, {
+			type: "web_url",
+			url: shareOnFacebookUrl,
+			title: "공유하기"
 		}];
 		// if (index === array.length - 1){
 		// 	buttons.push({
