@@ -140,8 +140,8 @@ let handlePost = (req, res) => {
         if (event.message && event.message.text) {
             respondMessage(event.message.text, sender);
         } else if (event.postback) {
-            let text = JSON.stringify(event.postback);
-            sendTextMessage("Postback received: "+text.substring(0, 200), sender)
+            // let text = JSON.stringify(event.postback);
+            // sendTextMessage("Postback received: "+text.substring(0, 200), sender)
 
             if (event.postback.payload === "get_started") {
             	sendMessage(formatter.formatIntro(), sender);
