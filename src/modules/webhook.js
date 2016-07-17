@@ -110,6 +110,11 @@ let respondMessage = (message, sender) => {
 		return;
 	}
 
+	match = text.match(/리오|도와|도움/);
+	if (match) {
+		sendMessage(formatter.formatSuggestion("무엇을 도와드릴까요? "), sender);
+	}
+
 	match = text.match(/인기웹툰/);
 	if (match) {
 		getPopularWebtoons(sender);
