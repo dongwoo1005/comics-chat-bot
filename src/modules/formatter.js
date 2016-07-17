@@ -132,7 +132,7 @@ let formatIntro = () => {
 		buttons: buttons
 	};
 	elements.push(jsonData);
-	return formatInGenericTemplate(jsonData);
+	return formatInGenericTemplate(elements);
 };
 
 exports.formatWebtoons = formatWebtoons;
