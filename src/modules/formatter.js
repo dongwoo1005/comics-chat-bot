@@ -113,6 +113,7 @@ let formatBoardItems = boardItems => {
 };
 
 let formatIntro = () => {
+	let elements = [];
 	let buttons = [{
 		type: "web_url",
 		url: baseWebUrl,
@@ -129,6 +130,7 @@ let formatIntro = () => {
 		image_url: "https://scontent.xx.fbcdn.net/v/t1.0-9/12540749_1136466519699990_7159314286917384260_n.jpg?oh=7e064d8bfa3cf65bab82676b88e70aef&oe=582BE3D0",
 		buttons: buttons
 	};
+	elements.push(jsonData);
 	return formatInGenericTemplate(jsonData);
 }
 
