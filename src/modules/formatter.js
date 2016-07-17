@@ -5,7 +5,7 @@ let formatWebtoons = webtoons => {
 	let webtoonsUrl = "http://www.battlecomics.co.kr/webtoons/"
 	webtoons.forEach((webtoon, index, array) => {
 		let webtoonUrl = webtoonsUrl + webtoon.id;
-		if (index !== array.length - 1){
+		if (index === array.length - 1){
 			elements.push({
 				title: webtoon.name,
 				subtitle: webtoon.writer,
