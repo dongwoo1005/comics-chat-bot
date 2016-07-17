@@ -4,7 +4,6 @@ const baseWebUrl = "http://www.battlecomics.co.kr";
 const baseFbShareUrl = 'https://www.facebook.com/sharer/sharer.php?u='
 
 let formatInGenericTemplate = elements => {
-	console.log(elements);
 	return {
 		"attachment": {
 			"type": "template",
