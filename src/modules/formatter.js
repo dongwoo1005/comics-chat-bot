@@ -4,6 +4,7 @@ const baseWebUrl = "http://www.battlecomics.co.kr";
 const baseFbShareUrl = 'https://www.facebook.com/sharer/sharer.php?u='
 
 let formatInGenericTemplate = elements => {
+	console.log(elements);
 	return {
 		"attachment": {
 			"type": "template",
@@ -132,7 +133,7 @@ let formatIntro = () => {
 	};
 	elements.push(jsonData);
 	return formatInGenericTemplate(jsonData);
-}
+};
 
 exports.formatWebtoons = formatWebtoons;
 exports.formatPapers = formatPapers;
