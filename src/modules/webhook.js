@@ -146,7 +146,6 @@ let handlePost = (req, res) => {
             if (event.postback.payload === "get_started") {
             	sendMessage(formatter.formatIntro(), sender);
             } else if (event.postback.payload === "start_chatting") {
-            	sendTextMessage("안녕 급식충ㅇㅅㅇ 반갑다.", sender);
             	sendMessage(formatter.formatHelp("안녕 급식충 ㅇㅅㅇ 반갑다. 보고싶은거 한번 골라봐."), sender);
             }
         }
