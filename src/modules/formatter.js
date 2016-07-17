@@ -43,18 +43,18 @@ let formatWebtoons = webtoons => {
 
 let formatPapers = papers => {
 	let elements = [];
-
 	papers.forEach(paper => {
 		let itemUrl = 'http://www.battlecomics.co.kr/users/' + paper.fk_user_id + '/page/items/' + paper.id;
+		let buttons = [{
+			type: "web_url",
+			url: itemUrl,
+			title: "바로 보기"
+		}];
 		let jsonData = {
 			title: paper.name,
 			subtitle: paper.user_name,
 			item_url: itemUrl,
-			buttons: [{
-				type: "web_url",
-				url: itemUrl,
-				title: "바로 보기"
-			}]
+			buttons: buttons
 		};
 		elements.push(jsonData);
 	});
