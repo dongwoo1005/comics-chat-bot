@@ -39,7 +39,7 @@ let formatWebtoons = webtoons => {
 		// 	});
 		// }
 		let jsonData = {
-			title: webtoon.name,
+			title: webtoon.name + " by " + webtoon.writer,
 			subtitle: webtoon.description,
 			item_url: webtoonUrl,
 			image_url: webtoon.image,
