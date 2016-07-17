@@ -72,9 +72,26 @@ let getPopularBoardItems = () => {
 			}
 		});
 	});
+};
+
+let getNewWebtoons = () => {
+	return new Promise((resolve, reject) => {
+		let url = apiEndpoint + '/webtoons/new';
+		request(url, (error, response, body) => {
+			if (error) {
+				console.log('Error getting new webtoons: ', error);
+				reject("getNewWebtoons error");
+			} else if (response.statusCode == 200) {
+				console.log('status 200 getting new webtoons: ', body);
+				let webtoons = JSON.parse(body).data.webtoons.slice(0,10);
+				resolve(webtoons);
+			}
+		});
+	});
 }
 
-exports.getPopularWebtoons = getPopularWebtoons
-exports.getPopularPapers = getPopularPapers
-exports.getPopularIllusts = getPopularIllusts
-exports.getPopularBoardItems = getPopularBoardItems
+exports.getPopularWebtoons = getPopularWebtoons;
+exports.getPopularPapers = getPopularPapers;
+exports.getPopularIllusts = getPopularIllusts;
+exports.getPopularBoardItems = getPopularBoardItems;
+exports.getNewWebtoons = getNewWebtoons;

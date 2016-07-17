@@ -131,6 +131,15 @@ let respondMessage = (message, sender) => {
 		return;
 	}
 
+	match = text.match(/신규웹툰/);
+	if (match) {
+		battlecomics.getNewWebtoons().then(webtoons => {
+			sendTextMessage('배틀코믹스 신규 웹툰입니다.', sender);
+			sendMessage(formatter.formatWebtoons(webtoons), sender);
+		});
+		return;
+	}
+
 	sendTextMessage('Text received, echo: ' + message.substring(0, 200), sender)
 }
 
