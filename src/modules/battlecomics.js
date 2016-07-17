@@ -56,8 +56,25 @@ let getPopularIllusts = () => {
 			}
 		});
 	});
+};
+
+let getPopularBoardItems = () => {
+	return new Promise((resolve, reject) => {
+		let url = apiEndpoint + '/boards/hot';
+		request(url, (error, response, body) => {
+			if (error) {
+				console.log('Error getting popular board items: ', error);
+				reject("getPopularBoardItems error");
+			} else if (response.statusCode == 200) {
+				console.log('status 200 getting popular board items: ', body);
+				let boardItems = JSON.parse(body).data.boards;
+				resolve(boardItems);
+			}
+		});
+	});
 }
 
 exports.getPopularWebtoons = getPopularWebtoons
 exports.getPopularPapers = getPopularPapers
 exports.getPopularIllusts = getPopularIllusts
+exports.getPopularBoardItems = getPopularBoardItems

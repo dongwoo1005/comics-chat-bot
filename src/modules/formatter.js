@@ -84,6 +84,28 @@ let formatIllusts = illusts => {
 	return formatInGenericTemplate(elements);
 }
 
+let formatBoardItems = boardItems => {
+	let elements = [];
+	boardItems.forEach(boardItem => {
+		let boardItemUrl = baseWebUrl + "/boards/" + boardItem.fk_board_group_type_id + "/posts/" + boardItem.id;
+		let buttons = [{
+			type: "web_url",
+			url: boardItemUrl,
+			title: "바로 보기"
+		}];
+		let jsonData = {
+			title: boardItem.title,
+			subtitle: boardItem.name,
+			item_url: boardItemUrl,
+			image_url: boardItem.thumbnail,
+			buttons: buttons
+		};
+		elements.push(jsonData);
+	});
+	return formatInGenericTemplate(elements);
+};
+
 exports.formatWebtoons = formatWebtoons;
 exports.formatPapers = formatPapers;
 exports.formatIllusts = formatIllusts;
+exports.formatBoardItems = formatBoardItems;

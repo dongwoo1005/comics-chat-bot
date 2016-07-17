@@ -122,6 +122,15 @@ let respondMessage = (message, sender) => {
 		return;
 	}
 
+	match = text.match(/인기게시글/);
+	if (match) {
+		battlecomics.getPopularBoardItems().then(boardItems => {
+			sendTextMessage('배틀코믹스 인기 게시글입니다.', sender);
+			sendMessage(formatter.formatBoardItems(boardItems), sender);
+		});
+		return;
+	}
+
 	sendTextMessage('Text received, echo: ' + message.substring(0, 200), sender)
 }
 
