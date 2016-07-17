@@ -113,22 +113,23 @@ let formatBoardItems = boardItems => {
 };
 
 let formatIntro = () => {
-		let buttons = [{
-			type: "web_url",
-			url: baseWebUrl,
-			title: "배틀코믹스 바로가기"
-		}, {
-			type: "postback",
-			payload: "start_chatting",
-			title: "리오와 채팅하기"
-		}];
-		let jsonData = {
-			title: "배틀코믹스",
-			subtitle: "부담없이 즐기는 무료 웹툰, 배틀코믹스",
-			item_url: baseWebUrl,
-			image_url: "https://scontent.xx.fbcdn.net/v/t1.0-9/12540749_1136466519699990_7159314286917384260_n.jpg?oh=7e064d8bfa3cf65bab82676b88e70aef&oe=582BE3D0",
-			buttons: buttons
-		};
+	let buttons = [{
+		type: "web_url",
+		url: baseWebUrl,
+		title: "배틀코믹스 바로가기"
+	}, {
+		type: "postback",
+		payload: "start_chatting",
+		title: "리오와 채팅하기"
+	}];
+	let jsonData = {
+		title: "배틀코믹스",
+		subtitle: "부담없이 즐기는 무료 웹툰, 배틀코믹스",
+		item_url: baseWebUrl,
+		image_url: "https://scontent.xx.fbcdn.net/v/t1.0-9/12540749_1136466519699990_7159314286917384260_n.jpg?oh=7e064d8bfa3cf65bab82676b88e70aef&oe=582BE3D0",
+		buttons: buttons
+	};
+	return formatInGenericTemplate(jsonData);
 }
 
 exports.formatWebtoons = formatWebtoons;
