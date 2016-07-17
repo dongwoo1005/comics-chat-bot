@@ -4,8 +4,9 @@
   "description": "Testing Facebook Messenger Bot for BattleComics",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js"
+    "dev": "nodemon --exec babel-node src/index.js",
+    "prestart": "babel src --out-dir dist",
+    "start": "node dist/index"
   },
   "author": "Dongwoo Son",
   "license": "ISC",
@@ -13,5 +14,10 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "request": "^2.73.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.10.1",
+    "babel-preset-es2015": "^6.9.0",
+    "nodemon": "^1.9.2"
   }
 }
