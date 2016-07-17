@@ -51,7 +51,7 @@ let formatPapers = papers => {
 			title: "바로 보기"
 		}];
 		let jsonData = {
-			title: paper.name,
+			title: paper.title,
 			subtitle: paper.user_name,
 			item_url: itemUrl,
 			buttons: buttons
