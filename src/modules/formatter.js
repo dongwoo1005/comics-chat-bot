@@ -10,13 +10,13 @@ let formatWebtoons = webtoons => {
 			"url": webtoonUrl,
 			"title": "바로 보기"
 		}];
-		if (index === array.length - 1){
-			buttons.push({
-				"type": "web_url",
-				"url": webtoonsUrl,
-				"title": "더 보기"
-			});
-		}
+		// if (index === array.length - 1){
+		// 	buttons.push({
+		// 		"type": "web_url",
+		// 		"url": webtoonsUrl,
+		// 		"title": "더 보기"
+		// 	});
+		// }
 		let jsondata = {
 			title: webtoon.name,
 			subtitle: webtoon.writer,
