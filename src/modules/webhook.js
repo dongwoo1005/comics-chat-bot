@@ -113,6 +113,7 @@ let respondMessage = (message, sender) => {
 	match = text.match(/리오|도와|도움/);
 	if (match) {
 		sendMessage(formatter.formatSuggestion("무엇을 도와드릴까요?"), sender);
+		return;
 	}
 
 	match = text.match(/인기웹툰/);
@@ -145,7 +146,7 @@ let respondMessage = (message, sender) => {
 		return;
 	}
 
-	sendTextMessage('Text received, echo: ' + message.substring(0, 200), sender)
+	sendTextMessage('잘 못 알아들었습니다. 원하시는 컨텐츠를 말하시거나 리오를 불러주세요.', sender);
 }
 
 let handleGet = (req, res) => {
