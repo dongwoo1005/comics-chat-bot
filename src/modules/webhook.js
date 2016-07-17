@@ -40,7 +40,7 @@ let setPersistentMenu = () => {
             "call_to_actions": [{
             	type: "web_url",
             	title: "배틀코믹스 바로가기",
-            	url: "http://www.battlecomics.co.kr";
+            	url: "http://www.battlecomics.co.kr"
             }]
         }
 	}, (error, response) => {
