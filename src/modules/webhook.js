@@ -81,7 +81,7 @@ let respondMessage = (message, sender) => {
 		});
 		return;
 	}
-	sendTextMessage("Text received, echo: " + text.substring(0, 200), sender)
+	sendTextMessage("Text received, echo: " + message.substring(0, 200), sender)
 }
 
 let handleGet = (req, res) => {
