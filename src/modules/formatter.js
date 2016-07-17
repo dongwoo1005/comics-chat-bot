@@ -1,5 +1,7 @@
 'use strict';
 
+const baseWebUrl = "http://www.battlecomics.co.kr";
+
 let formatInGenericTemplate = elements => {
 	return {
 		"attachment": {
@@ -14,7 +16,7 @@ let formatInGenericTemplate = elements => {
 
 let formatWebtoons = webtoons => {
 	let elements = [];
-	let webtoonsUrl = "http://www.battlecomics.co.kr/webtoons/"
+	let webtoonsUrl = baseWebUrl + "/webtoons/"
 	webtoons.forEach((webtoon, index, array) => {
 		let webtoonUrl = webtoonsUrl + webtoon.id;
 		let buttons = [{
@@ -44,7 +46,7 @@ let formatWebtoons = webtoons => {
 let formatPapers = papers => {
 	let elements = [];
 	papers.forEach(paper => {
-		let itemUrl = 'http://www.battlecomics.co.kr/users/' + paper.fk_user_id + '/page/items/' + paper.id;
+		let itemUrl = baseWebUrl + '/users/' + paper.fk_user_id + '/page/items/' + paper.id;
 		let buttons = [{
 			type: "web_url",
 			url: itemUrl,
@@ -61,5 +63,27 @@ let formatPapers = papers => {
 	return formatInGenericTemplate(elements);
 };
 
+let formatIllusts = illusts => {
+	let elements = [];
+	illusts.forEach(illust => {
+		let illustUrl = baseWebUrl + "/fanarts/" + illust.id
+		let buttons = [{
+			type: "web_url",
+			url: illustUrl,
+			title: "바로 보기"
+		}];
+		let jsonData = {
+			title: illust.title,
+			subtitle: illust.name,
+			item_url: illustUrl,
+			image_url: illust.thumbnail,
+			buttons: buttons
+		};
+		elements.push(jsonData);
+	});
+	return formatInGenericTemplate(elements);
+}
+
 exports.formatWebtoons = formatWebtoons;
 exports.formatPapers = formatPapers;
+exports.formatIllusts = formatIllusts;

@@ -42,5 +42,22 @@ let getPopularPapers = () => {
 	});
 };
 
+let getPopularIllusts = () => {
+	return new Promise((resolve, reject) => {
+		let url = apiEndpoint + '/illusts/hot';
+		request(url, (error, response, body) => {
+			if (error) {
+				console.log('Error getting popular illusts: ', error);
+				reject("getPopularIllusts error");
+			} else if (response.statusCode == 200) {
+				console.log('status 200 getting popular illusts: ', body);
+				let illusts = JSON.parse(body).data.illusts;
+				resolve(illusts);
+			}
+		});
+	});
+}
+
 exports.getPopularWebtoons = getPopularWebtoons
 exports.getPopularPapers = getPopularPapers
+exports.getPopularIllusts = getPopularIllusts

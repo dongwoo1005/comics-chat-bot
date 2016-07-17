@@ -113,6 +113,15 @@ let respondMessage = (message, sender) => {
 		return;
 	}
 
+	match = text.match(/인기일러/);
+	if (match) {
+		battlecomics.getPopularIllusts().then(illusts => {
+			sendTextMessage('배틀코믹스 인기 일러스트입니다.', sender);
+			sendMessage(formatter.formatIllusts(illusts), sender);
+		});
+		return;
+	}
+
 	sendTextMessage('Text received, echo: ' + message.substring(0, 200), sender)
 }
 
