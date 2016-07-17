@@ -144,7 +144,7 @@ let formatIntro = () => {
 	let buttons = [{
 		type: "web_url",
 		url: baseWebUrl,
-		title: "배틀코믹스 놀러가"
+		title: "배틀코믹스 놀러가기"
 	}, {
 		type: "postback",
 		payload: "start_chatting",
