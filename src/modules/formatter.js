@@ -5,24 +5,25 @@ let formatWebtoons = webtoons => {
 	let webtoonsUrl = "http://www.battlecomics.co.kr/webtoons/"
 	webtoons.forEach((webtoon, index, array) => {
 		let webtoonUrl = webtoonsUrl + webtoon.id;
+		let buttons = [{
+			"type": "web_url",
+			"url": webtoonUrl,
+			"title": "바로 보기"
+		}];
+		if (index === array.length - 1){
+			buttons.push({
+				"type": "web_url",
+				"url": webtoonsUrl,
+				"title": "더 보기"
+			});
+		}
 		let jsondata = {
 			title: webtoon.name,
 			subtitle: webtoon.writer,
 			"item_url": webtoonUrl,
 			"image_url": webtoon.image,
-			"buttons": [{
-				"type": "web_url",
-				"url": webtoonUrl,
-				"title": "바로 보기"
-			}]
+			"buttons": buttons
 		};
-		if (index === array.length - 1){
-			jsondata.buttons.push({
-				"type": "web_url",
-				"url": webtoonsUrls,
-				"title": "더 보기"
-			});
-		}
 		elements.push(jsondata);
 	});
 	return {
