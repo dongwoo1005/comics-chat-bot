@@ -146,7 +146,7 @@ let respondMessage = (message, sender) => {
 		return;
 	}
 
-	sendTextMessage('잘 못 알아들었습니다. 원하시는 컨텐츠를 말하시거나 리오를 불러주세요.', sender);
+	sendTextMessage('잘 못 알아들었습니다. 원하시는 컨텐츠를 말씀하시거나 리오를 불러주세요.', sender);
 }
 
 let handleGet = (req, res) => {
