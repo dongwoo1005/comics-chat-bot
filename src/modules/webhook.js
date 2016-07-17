@@ -75,13 +75,16 @@ let respondMessage = (message, sender) => {
 
 	match = message.match(/인기 웹툰/);
 	if (match) {
-		battlecomics.getPopularWebtoons().then(() => {
-			sendTextMessage("현재 실시간 인기 웹툰입니다.");
+		battlecomics.getPopularWebtoons().then((webtoons) => {
+			sendTextMessage('현재 실시간 인기 웹툰입니다.', sender);
+			webtoons.forEach((webtoon) => {
+				sendTextMessage('제목: ' + webtoon.name, sender);
+			});
 			// sendMessage(formatter.formatWebtoons(webtoons), sender);
 		});
 		return;
 	}
-	sendTextMessage("Text received, echo: " + message.substring(0, 200), sender)
+	sendTextMessage('Text received, echo: ' + message.substring(0, 200), sender)
 }
 
 let handleGet = (req, res) => {
