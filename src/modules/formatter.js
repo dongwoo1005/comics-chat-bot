@@ -40,7 +40,7 @@ let formatWebtoons = webtoons => {
 		// }
 		let jsonData = {
 			title: webtoon.name,
-			subtitle: webtoon.writer,
+			subtitle: webtoon.description,
 			item_url: webtoonUrl,
 			image_url: webtoon.image,
 			buttons: buttons
