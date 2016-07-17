@@ -29,6 +29,31 @@ let greetFirstTimeUserInteraction = () => {
 	});
 }
 
+let setPersistentMenu = () => {
+	request({
+		url: 'https://graph.facebook.com/v2.6/me/thread_settings',
+        qs: {access_token: access_token},
+        method: 'POST',
+        json: {
+            "setting_type": "call_to_actions",
+            "thread_state": "existing_thread",
+            "call_to_actions": [{
+            	type: "web_url",
+            	title: "배틀코믹스 바로가기",
+            	url: "http://www.battlecomics.co.kr";
+            }]
+        }
+	}, (error, response) => {
+		if (error) {
+			console.log('Error sending message: ', error);
+		} else if (response.body.error) {
+			console.log('Error: ', response.body.error);
+		} else {
+			console.log('Setting up Menu');
+		}
+	});
+}
+
 let sendMessage = (messageData, sender) => {
 	request({
 		url: 'https://graph.facebook.com/v2.6/me/messages',
@@ -147,6 +172,7 @@ let respondMessage = (message, sender) => {
 
 let handleGet = (req, res) => {
 	greetFirstTimeUserInteraction();
+	setPersistentMenu();
 	if (req.query['hub.verify_token'] === verify_token) {
         res.send(req.query['hub.challenge']);
     }
