@@ -7,7 +7,7 @@ let formatWebtoons = webtoons => {
 		elements.push({
 			title: webtoon.name,
 			subtitle: webtoon.writer,
-			"image_url": webtoon.thumbnail,
+			"image_url": webtoon.image,
 			"buttons": [{
 				"type": "web_url",
 				"url": webtoonPageUrl + webtoon.id,
