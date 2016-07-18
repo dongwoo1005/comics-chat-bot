@@ -3,9 +3,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import home from './modules/home';
+import home from './modules/home/home';
 
-import webhook from './modules/webhook';
+import webhook from './modules/webhook/webhook';
 
 const app = express();
 
