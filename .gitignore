@@ -8,3 +8,6 @@ npm-debug.log*
 
 # Compiled from ES6 src
 dist
+
+# Sublime
+*.sublime*
