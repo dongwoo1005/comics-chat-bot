@@ -2,6 +2,7 @@
 
 import request from 'request';
 import battlecomics from './battlecomics';
+import facebook from './facebook';
 import formatter from './formatter';
 
 const access_token = process.env.FB_PAGE_ACCESS_TOKEN;
@@ -172,8 +173,9 @@ let handlePost = (req, res) => {
             if (payload === "get_started") {
             	sendMessage(formatter.formatIntro(), sender);
             } else if (payload === "start_chatting") {
-            	sendTextMessage("안녕하세요 " + sender + "님, 반갑습니다.", sender);
-            	sendMessage(formatter.formatSuggestion("안녕하세요 반갑습니다. 무엇을 보여드릴까요? "), sender);
+				facebook.getUserInfo(sender).then(userInfo => {
+					sendMessage(formatter.formatSuggestion("안녕하세요 반갑습니다, " + userInfo.first_name + "님! 무엇을 보여드릴까요? "), sender);
+				});
             } else if (payload === "popular_webtoon") {
             	getPopularWebtoons();
             } else if (payload === "new_webtoon") {
