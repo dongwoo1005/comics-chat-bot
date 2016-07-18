@@ -174,7 +174,10 @@ let handlePost = (req, res) => {
             	sendMessage(formatter.formatIntro(), sender);
             } else if (payload === "start_chatting") {
 				facebook.getUserInfo(sender).then(userInfo => {
-					sendMessage(formatter.formatSuggestion("안녕하세요 반갑습니다, " + userInfo.first_name + "님! 무엇을 보여드릴까요? "), sender);
+					sendMessage(formatter.formatSuggestion("안녕하세요 반갑습니다, " + userInfo.first_name + "님! 무엇을 보여드릴까요?"), sender);
+				}, error => {
+					console.log(error);
+					sendMessage(formatter.formatSuggestion("안녕하세요 반갑습니다. 무엇을 보여드릴까요?"), sender);
 				});
             } else if (payload === "popular_webtoon") {
             	getPopularWebtoons();
