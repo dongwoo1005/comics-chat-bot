@@ -127,11 +127,13 @@ let respondMessage = (message, sender) => {
 	sendTextMessage('잘 못알아들었습니다. 원하시는 컨텐츠를 말씀하시거나 리오를 불러주세요 :D', sender);
 }
 
+exports.sendIntroMessage = sendIntroMessage;
+exports.sendGreetAndSuggestion = sendGreetAndSuggestion;
+
+exports.sendNewWebtoons = sendNewWebtoons;
 exports.sendPopularWebtoons = sendPopularWebtoons;
 exports.sendPopularPapers = sendPopularPapers;
 exports.sendPopularIllusts = sendPopularIllusts;
 exports.sendPopularBoardItems = sendPopularBoardItems;
-exports.sendNewWebtoons = sendNewWebtoons;
+
 exports.respondMessage = respondMessage;
-exports.sendIntroMessage = sendIntroMessage;
-exports.sendGreetAndSuggestion = sendGreetAndSuggestion;
