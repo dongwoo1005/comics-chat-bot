@@ -10,12 +10,12 @@ How to Run the Server for Development
 ---------------------
 Nodemon reloads the server automatically.
 ```
-$ npm dev 
+$ npm run dev 
 ```
 
 How to Run the Server for Hosting
 --------------------
-Babel compiles ES6 source files to distribute version
+Babel compiles ES6 source files to distribute version.
 ```
 $ npm start
 ```
